@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
 import ChatInput from '../ChatInput/ChatInput';
+import styles from './Chat.module.css';
 
 const Chat: React.FC = () => {
 
-    const [response, setResponse] = useState<string>("");
     const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
 
     const getMessage = (message) => {
-        console.log("This is from Chat.tsx:", message);
-        getAIResponse(message);
+        // Add user message to state
+        const newMessages = [...messages, { role: "user", content: message }];
+        setMessages(newMessages);
+        getAIResponse(newMessages);
     }
 
-    const getAIResponse = async (message) => {
-        setMessages([...messages, {
-            role: "user",
-            content: message
-        }])
+    const getAIResponse = async (newMessages) => {
         try {
             const response = await fetch("api/chat", {
                 method: "POST",
                 headers:{
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ message })
+                body: JSON.stringify({ newMessages })
             })
             const data = await response.json()
-            setResponse(data.completion.choices[0].message.content);
-            setMessages([...messages, {
+            setMessages([...newMessages, {
                 role: "system",
                 content: data.completion.choices[0].message.content
             }])
+            console.log(messages)
         } catch (error) {
             console.error("Error:", error);
         }
@@ -37,15 +35,23 @@ const Chat: React.FC = () => {
 
     return (
         <div>
+            <div className={styles.chatbox}>
+                {messages.map((message, index) => (
+                    <p key={index}>{message.role}: {message.content}</p>
+                ))}
+            </div>
             <ChatInput 
-            getMessage = {getMessage}
+                getMessage = {getMessage}
             />
-            {/* {response && <p>{response}</p>} */}
-            {messages.filter(message => message.role = "user").map((message, index) => (
-                <p key={index}>{message.role}: {message.content}</p>
-            ))}
         </div>
     )
 }
+
+// {messages.filter(message => message.role = "user").map((message, index) => (
+//     <p key={index}>{message.role}: {message.content}</p>
+// ))}
+// {messages.filter(message => message.role = "system").map((message, index) => (
+//     <p key={index}>{message.role}: {message.content}</p>
+// ))} 
 
 export default Chat;
