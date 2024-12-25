@@ -1,5 +1,6 @@
 import { OpenAI } from "openai";
 import dotenv from "dotenv";
+import { NextApiRequest, NextApiResponse } from "next";
 
 dotenv.config();
 
@@ -7,10 +8,25 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
-const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    store: true,
-    messages: [
-        { "role": "user", "content": "write a haiku about ai" }
-    ]
-});
+export default async function handler (req: NextApiRequest, res: NextApiResponse) {
+  try {
+    if (req.method === "POST") {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+            { "role": "system", content: "You are a language bot assistant who can conversate with the user in a language of their preference so that they may practice the langauge and improve. You must give feedback on the users grammar, choice of words and correct them to help them improve their language learning. Respond to the user in a friendly manner. " },
+            { "role": "user", "content": req.body.message }
+        ]
+    });
+      res.status(200).json({ completion });
+    }
+  }
+  catch (error) {
+    res.status(500).json({ error: error});
+  }
+    // res.status(200).json({ completion });
+}
+
+
+
+  
