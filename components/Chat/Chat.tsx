@@ -4,6 +4,7 @@ import ChatInput from '../ChatInput/ChatInput';
 const Chat: React.FC = () => {
 
     const [response, setResponse] = useState<string>("");
+    const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
 
     const getMessage = (message) => {
         console.log("This is from Chat.tsx:", message);
@@ -11,6 +12,10 @@ const Chat: React.FC = () => {
     }
 
     const getAIResponse = async (message) => {
+        setMessages([...messages, {
+            role: "user",
+            content: message
+        }])
         try {
             const response = await fetch("api/chat", {
                 method: "POST",
@@ -21,6 +26,10 @@ const Chat: React.FC = () => {
             })
             const data = await response.json()
             setResponse(data.completion.choices[0].message.content);
+            setMessages([...messages, {
+                role: "system",
+                content: data.completion.choices[0].message.content
+            }])
         } catch (error) {
             console.error("Error:", error);
         }
@@ -31,7 +40,10 @@ const Chat: React.FC = () => {
             <ChatInput 
             getMessage = {getMessage}
             />
-            {response && <p>{response}</p>}
+            {/* {response && <p>{response}</p>} */}
+            {messages.filter(message => message.role = "user").map((message, index) => (
+                <p key={index}>{message.role}: {message.content}</p>
+            ))}
         </div>
     )
 }
