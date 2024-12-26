@@ -34,12 +34,22 @@ const Chat: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
+            {messages.length > 0 ? 
             <div className={styles.chatbox}>
                 {messages.map((message, index) => (
-                    <p key={index}>{message.role}: {message.content}</p>
+                    <div className={
+                        message.role === "user" ? styles.userMessage : styles.systemMessage
+                    } 
+                        key={index}>
+                        <p key={index}>{message.content}</p>
+                    </div>
                 ))}
-            </div>
+            </div> : 
+            <div>
+                <h1>Welcome!</h1>
+                <p>How may I help you today?</p>
+            </div>}
             <ChatInput 
                 getMessage = {getMessage}
             />

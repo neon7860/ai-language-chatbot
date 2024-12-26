@@ -1,11 +1,42 @@
-.chatbox{
+.container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    width: 100%;
-    background-color: #f5f5f5;
-    border-radius: 10px;
+    justify-content: space-between; /* Keeps input at the bottom */
+    height: 89vh;
+    background-color: #f5f5f5; /* Light background */
+    align-items: center;
+}
+
+/* Chatbox (messages area) */
+.chatbox {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto; /* Enable scrolling for long conversations */
     padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+}
+
+/* User's message bubble */
+.userMessage {
+    align-self: flex-end; /* Align to the right */
+    background-color: #0078d4; /* Blue background */
+    color: white; /* White text */
+    padding: 30px;;
+    border-radius: 15px 15px 0 15px; /* Rounded corners with a "tail" */
+    max-width: 70%; /* Limit bubble width */
+    margin: 5px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* AI's message bubble */
+.systemMessage {
+    align-self: flex-start; /* Align to the left */
+    background-color: #e6f7ff; /* Light blue background */
+    color: #000; /* Black text */
+    padding: 30px;
+    border-radius: 15px 15px 15px 0; /* Rounded corners with a "tail" */
+    max-width: 70%; /* Limit bubble width */
+    margin: 5px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
