@@ -8,7 +8,7 @@ interface ChatInputProps {
 const ChatInput: React.FC<ChatInputProps> = ({ getMessage }) => {
     const [question, setQuestion] = useState('');
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setQuestion(e.target.value);
     };
 
@@ -21,11 +21,11 @@ const ChatInput: React.FC<ChatInputProps> = ({ getMessage }) => {
     return (
         <div className={styles.container}>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <input
-                    type="text"
+                <textarea
                     value={question}
                     className={styles.input}
                     onChange={handleInputChange}
+                    rows={4}
                     placeholder="Chat with me..."
                 />
                 <button type="submit">Send</button>

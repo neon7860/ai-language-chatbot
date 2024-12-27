@@ -46,7 +46,7 @@ const Chat: React.FC = () => {
                     </div>
                 ))}
             </div> : 
-            <div>
+            <div className={styles.welcomeMessage}>
                 <h1>Welcome!</h1>
                 <p>How may I help you today?</p>
             </div>}
@@ -56,12 +56,5 @@ const Chat: React.FC = () => {
         </div>
     )
 }
-
-// {messages.filter(message => message.role = "user").map((message, index) => (
-//     <p key={index}>{message.role}: {message.content}</p>
-// ))}
-// {messages.filter(message => message.role = "system").map((message, index) => (
-//     <p key={index}>{message.role}: {message.content}</p>
-// ))} 
 
 export default Chat;
