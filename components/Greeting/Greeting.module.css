@@ -1,0 +1,44 @@
+
+.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.greeting{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    line-height: 1.5;
+}
+
+.greetingTitle{
+    font-size: 3.5rem;
+    color: #fff;
+}
+
+.greetingSubtitle{
+    font-size: 1rem;
+    color: #fff;
+}
+
+.languageOptions{
+    display: flex;
+    gap: 10px;
+}
+
+.languageButton{
+    background-color: #fff;
+    color: black;
+    padding: 30px 50px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 1.3rem;
+}

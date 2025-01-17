@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-between; /* Keeps input at the bottom */
     align-items: center;
-    height: 87vh; /* Full viewport height */
+    height: calc(100vh - 100px);
     background-color: #3e3e42; /* Light background */
     padding-bottom: 20px;
 }

@@ -20,7 +20,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ getMessage }) => {
 
     return (
         <div className={styles.container}>
-            <form className={styles.form} onSubmit={handleSubmit}>
+            <form className={styles.form}>
                 <textarea
                     value={question}
                     className={styles.input}
@@ -28,7 +28,8 @@ const ChatInput: React.FC<ChatInputProps> = ({ getMessage }) => {
                     rows={4}
                     placeholder="Chat with me..."
                 />
-                <button type="submit">Send</button>
+                {/* <button type="submit">Send</button> */}
+                <img src="/assets/send.svg" alt="Send" className={styles.sendButton} onClick={handleSubmit} />
             </form>
         </div>
     );

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import ChatInput from '../ChatInput/ChatInput';
 import styles from './Chat.module.css';
+import Greeting from '../Greeting/Greeting';
 
 const Chat: React.FC = () => {
 
     const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
+    const [greeting, setGreeting] = useState(true);
 
     const getMessage = (message) => {
         // Add user message to state
@@ -33,9 +35,27 @@ const Chat: React.FC = () => {
         }
     }
 
+    async function chooseLanguage(language: string) {
+        try{
+            const response = await fetch("api/chat", {
+                method: "POST",
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ language })
+            })
+            const data = await response.json()
+            console.log(data)
+        } catch(err){
+            console.log(err)
+        }
+    }
+
     return (
         <div className={styles.container}>
-            {messages.length > 0 ? 
+            {greeting ? <Greeting 
+            chooseLanguage={chooseLanguage} /> : 
+            (messages.length > 0 ? 
             <div className={styles.chatbox}>
                 {messages.map((message, index) => (
                     <div className={
@@ -49,7 +69,8 @@ const Chat: React.FC = () => {
             <div className={styles.welcomeMessage}>
                 <h1>Welcome!</h1>
                 <p>How may I help you today?</p>
-            </div>}
+            </div>)
+            }
             <ChatInput 
                 getMessage = {getMessage}
             />

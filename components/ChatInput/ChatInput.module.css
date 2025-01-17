@@ -3,6 +3,10 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    position: sticky; /* Make the container sticky */
+    bottom: 0; /* Stick to the bottom */
+    background-color: #3e3e42; /* Match the background color */
+    padding-bottom: 20px; /* Add padding to match the parent container */
 }
 
 .form{
@@ -12,15 +16,16 @@
     background-color: #fff;
     width: 70%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 40px;
+    border-radius: 20px;
 }
 
 .input{
     width: 90%;
-    padding: 15px;
+    padding: 5px;
     border: none;
     margin: 10px;
     font-size: 16px;
     outline: none;
-    height: 40px;
+    height: 80px;
+    resize: none;
 }
