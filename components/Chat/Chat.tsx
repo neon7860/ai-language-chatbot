@@ -35,21 +35,21 @@ const Chat: React.FC = () => {
         }
     }
 
-    async function chooseLanguage(language: string) {
-        try{
-            const response = await fetch("api/chat", {
-                method: "POST",
-                headers:{
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ language })
-            })
-            const data = await response.json()
-            console.log(data)
-        } catch(err){
-            console.log(err)
-        }
-    }
+    // async function chooseLanguage(language: string) {
+    //     try{
+    //         const response = await fetch("api/chat", {
+    //             method: "POST",
+    //             headers:{
+    //                 "Content-Type": "application/json"
+    //             },
+    //             body: JSON.stringify({ language })
+    //         })
+    //         const data = await response.json()
+    //         console.log(data)
+    //     } catch(err){
+    //         console.log(err)
+    //     }
+    // }
 
     return (
         <div className={styles.container}>
