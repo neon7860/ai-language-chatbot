@@ -8,9 +8,12 @@ const Chat: React.FC = () => {
     const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
     const [greeting, setGreeting] = useState(true);
 
-    const getMessage = (message) => {
+    const getMessage = (message: string, language?: string) => {
+        if (greeting) {
+            setGreeting(false);
+        }
         // Add user message to state
-        const newMessages = [...messages, { role: "user", content: message }];
+        const newMessages = [...messages, { role: "user", content: message, language: language }];
         setMessages(newMessages);
         getAIResponse(newMessages);
     }
@@ -35,26 +38,12 @@ const Chat: React.FC = () => {
         }
     }
 
-    // async function chooseLanguage(language: string) {
-    //     try{
-    //         const response = await fetch("api/chat", {
-    //             method: "POST",
-    //             headers:{
-    //                 "Content-Type": "application/json"
-    //             },
-    //             body: JSON.stringify({ language })
-    //         })
-    //         const data = await response.json()
-    //         console.log(data)
-    //     } catch(err){
-    //         console.log(err)
-    //     }
-    // }
-
     return (
         <div className={styles.container}>
-            {greeting ? <Greeting 
-            chooseLanguage={chooseLanguage} /> : 
+            {greeting ? 
+            <Greeting 
+            getMessage={getMessage} 
+            /> : 
             (messages.length > 0 ? 
             <div className={styles.chatbox}>
                 {messages.map((message, index) => (

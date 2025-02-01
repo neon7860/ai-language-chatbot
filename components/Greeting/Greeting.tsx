@@ -2,7 +2,7 @@ import React from "react"
 import { motion } from 'framer-motion';
 import styles from './Greeting.module.css';
 
-export default function Greeting({ chooseLanguage }) {
+export default function Greeting({ getMessage }) {
     return (
         <div className={styles.container}>
             <motion.div
@@ -21,10 +21,10 @@ export default function Greeting({ chooseLanguage }) {
                 transition={{ duration: 1.5 }}  // Animation timing
             >
                 <div className={styles.languageOptions}>
-                    <motion.button whileHover={{ scale: 0.9 }} onClick={chooseLanguage("English")} className={styles.languageButton}>English</motion.button>
-                    <motion.button whileHover={{ scale: 0.9 }} onClick={chooseLanguage("Spanish")} className={styles.languageButton}>Spanish</motion.button>
-                    <motion.button whileHover={{ scale: 0.9 }} className={styles.languageButton}>French</motion.button>
-                    <motion.button whileHover={{ scale: 0.9 }} className={styles.languageButton}>German</motion.button>
+                    <motion.button whileHover={{ scale: 0.9 }} onClick={() => getMessage("Hi, lets practice!", "English")} className={styles.languageButton}>English</motion.button>
+                    <motion.button whileHover={{ scale: 0.9 }} onClick={() => getMessage("Hi, lets practice!", "Spanish")} className={styles.languageButton}>Spanish</motion.button>
+                    <motion.button whileHover={{ scale: 0.9 }} onClick={() => getMessage("Hi, lets practice!", "French")} className={styles.languageButton}>French</motion.button>
+                    <motion.button whileHover={{ scale: 0.9 }} onClick={() => getMessage("Hi, lets practice!", "German")} className={styles.languageButton}>German</motion.button>
                 </div>
             </motion.div>
         </div>
